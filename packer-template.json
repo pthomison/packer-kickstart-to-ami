@@ -1,0 +1,23 @@
+{
+  "variables":
+  {},
+  "builders":
+  [{ "type": "virtualbox-iso",
+    "iso_url": "/ISOs/CentOS-7-x86_64-DVD-1810.iso",
+    "iso_checksum": "6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1",
+    "iso_checksum_type": "sha256",
+    "headless": "false",
+    "output_directory": "builds",
+    "vm_name": "centos-7-docker-machine",
+    "guest_os_type":"RedHat_64",
+    "disk_size": "20480",
+    "boot_wait": "5s",
+    "http_directory": "src",
+    "boot_command": [ "<tab> text ks=http://{{ .HTTPIP }}:{{.HTTPPort }}/centos-docker.ks<enter><wait>" ],
+    "ssh_username": "root",
+    "ssh_password": "r3dh4t1!",
+    "ssh_wait_timeout":"1000s",
+    "shutdown_command": "shutdown -P now",
+    "format": "ova"
+    }]
+}

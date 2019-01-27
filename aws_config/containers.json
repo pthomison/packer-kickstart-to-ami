@@ -1,0 +1,9 @@
+[
+  {
+    "Description": "Centos 7 OVA",
+    "Format": "ova",
+    "UserBucket": {
+        "S3Bucket": "pjt-us-west-2-ami",
+        "S3Key": "centos-7-docker-machine.ova"
+    }
+}]
