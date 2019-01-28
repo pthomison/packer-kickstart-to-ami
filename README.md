@@ -2,18 +2,18 @@
 =======
 
 ### Standard AWS Warning
-This is a paid service, so be prepared to cough up a few bucks for hosting & instance time. That being said, if you still have the free tier available, this may not cost you any money, but no guarantees.
+This is a paid service, so be prepared to cough up a few bucks for storage hosting & instance time. That being said, if you still have the free tier available, this may not cost you any money, but no guarantees.
 
 
 ### Environment
-Fedora 29 Host
-Packer 1.3.3
-Centos ISO CentOS-7-x86_64-DVD-1810.iso
-ISO Hash (sha256): 6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1
-AWS CLI Version: aws-cli/1.16.96 Python/2.7.15 Linux/4.20.3-200.fc29.x86_64 botocore/1.12.86
-vboxmanage (VirtualBox) Version: 6.0.2r128162
-Jinja Version: Jinja2-2.10 MarkupSafe-1.1.0
-Python Version: Python 2.7.15
++ Fedora 29 Host
++ Packer 1.3.3
++ Centos ISO CentOS-7-x86_64-DVD-1810.iso
+  + ISO Hash (sha256): 6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1
++ AWS CLI Version: aws-cli/1.16.96 Python/2.7.15 Linux/4.20.3-200.fc29.x86_64 botocore/1.12.86
++ vboxmanage (VirtualBox) Version: 6.0.2r128162
++ Jinja Version: Jinja2-2.10 MarkupSafe-1.1.0
++ Python Version: Python 2.7.15
 
 ### Documentation Used
 + http://work.haufegroup.io/automate-ami-with-packer/
