@@ -6,11 +6,11 @@
          "Action":[
             "s3:GetBucketLocation",
             "s3:GetObject",
-            "s3:ListBucket" 
+            "s3:ListBucket"
          ],
          "Resource":[
-            "arn:aws:s3:::pjt-us-west-2-ami",
-            "arn:aws:s3:::pjt-us-west-2-ami/*"
+            "arn:aws:s3:::{{ s3_bucket }}",
+            "arn:aws:s3:::{{ s3_bucket }}/*"
          ]
       },
       {
