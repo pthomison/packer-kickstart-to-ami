@@ -23,19 +23,23 @@ tldr first, more explanation later
 
 ### Prereqs
 1. Install Packer
-https://www.packer.io/intro/getting-started/install.html#precompiled-binaries
+  + https://www.packer.io/intro/getting-started/install.html#precompiled-binaries
 2. Download a centos 7 ISO
-http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso
+  + http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso
 3. Clone this repo
-https://github.com/pthomison/packer-kickstart-to-ami.git
+  + https://github.com/pthomison/packer-kickstart-to-ami.git
 4. Install the aws cli tool
-https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html
+  + https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html
 5. Configure the aws cli tool
-`$ aws configure`
+
+```
+$ aws configure
+```
 6. Install VirtualBox
-https://www.virtualbox.org/wiki/Linux_Downloads
+  + https://www.virtualbox.org/wiki/Linux_Downloads
 7. Configure your system for VirtualBox
-Given that its playing with kernel modules, I reboot a decent amount. Might not be necessary
+  + Given that its playing with kernel modules, I reboot a decent amount. Might not be necessary
+
 ```
 $ yum install kernel-devel -y
 $ (potentially) sudo systemctl reboot
@@ -43,28 +47,43 @@ $ sudo /sbin/vboxconfig
 $ sudo systemctl reboot
 ```
 8. Install Jinja2
-http://jinja.pocoo.org/docs/2.10/intro/#installation
+  + http://jinja.pocoo.org/docs/2.10/intro/#installation
 9. Create an S3 Bucket & Expose it publicly
-(Note: If anyone knows an easy way to not expose it & have the import work, please hmu with a PR or github issue)
-https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
+  + (Note: If anyone knows an easy way to not expose it & have the import work, please hmu with a PR or github issue)
+  + https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
 
 
 ### Steps
 1. Execute a build from project directory
-`packer build packer-template.json`
+
+```
+packer build packer-template.json
+```
 2. Wait for this to complete the installation & build the image
 3. Upload the image to your S3 Bucket
-`aws s3 cp ./builds/centos-7-docker-machine.ova s3://<S3_BUCKET>/centos-7-docker-machine.ova`
+
+```
+aws s3 cp ./builds/centos-7-docker-machine.ova s3://<S3_BUCKET>/centos-7-docker-machine.ova
+```
 4. Template necessary AWS objects
+
 ```
 python2 template.py --s3-bucket <IMAGE_BUCKET> --image-file centos-7-docker-machine.ova
 ```
 5. Create necessary AWS objects
+
 ```
 aws iam create-role --role-name vmimport --assume-role-policy-document file://aws_config/trust-policy.json
 aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://aws_config/role-policy.json
 ```
 6. Import the image
-`aws ec2 import-image --description "centos-7-docker-machine.ova" --license-type BYOL --disk-containers file://aws_config/containers.json`
+
+```
+aws ec2 import-image --description "centos-7-docker-machine.ova" --license-type BYOL --disk-containers file://aws_config/containers.json
+```
+
 7. Monitor the import
-`aws ec2 describe-import-image-tasks`
+
+```
+aws ec2 describe-import-image-tasks
+```
