@@ -33,8 +33,8 @@ autopart --type=lvm
 # Partition clearing information
 clearpart --all --initlabel --drives=sda
 
-repo --name="Base" --baseurl="http://mirror.centos.org/centos/7/os/x86_64/"
-repo --name="Extras" --baseurl="http://mirror.centos.org/centos/7/extras/x86_64/"
+repo --name="Base"    --baseurl="http://mirror.centos.org/centos/7/os/x86_64/"
+repo --name="Extras"  --baseurl="http://mirror.centos.org/centos/7/extras/x86_64/"
 repo --name="Updates" --baseurl="http://mirror.centos.org/centos/7/updates/x86_64/"
 
 # repo --name="Base" --baseurl="http://127.0.0.1/repos/centos/7/base/"
@@ -51,11 +51,11 @@ docker
 
 %end
 
-%pre
-modprobe dm_thin_pool
-%end
-
 %post
+
+# Uses overlay2 by default
+systemctl start docker
+systemctl enable docker
 
 %end
 
