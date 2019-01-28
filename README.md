@@ -57,33 +57,33 @@ $ sudo systemctl reboot
 1. Execute a build from project directory
 
 ```
-packer build packer-template.json
+$ packer build packer-template.json
 ```
 2. Wait for this to complete the installation & build the image
 3. Upload the image to your S3 Bucket
 
 ```
-aws s3 cp ./builds/centos-7-docker-machine.ova s3://<S3_BUCKET>/centos-7-docker-machine.ova
+$ aws s3 cp ./builds/centos-7-docker-machine.ova s3://<S3_BUCKET>/centos-7-docker-machine.ova
 ```
 4. Template necessary AWS objects
 
 ```
-python2 template.py --s3-bucket <IMAGE_BUCKET> --image-file centos-7-docker-machine.ova
+$ python2 template.py --s3-bucket <IMAGE_BUCKET> --image-file centos-7-docker-machine.ova
 ```
 5. Create necessary AWS objects
 
 ```
-aws iam create-role --role-name vmimport --assume-role-policy-document file://aws_config/trust-policy.json
-aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://aws_config/role-policy.json
+$ aws iam create-role --role-name vmimport --assume-role-policy-document file://aws_config/trust-policy.json
+$ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://aws_config/role-policy.json
 ```
 6. Import the image
 
 ```
-aws ec2 import-image --description "centos-7-docker-machine.ova" --license-type BYOL --disk-containers file://aws_config/containers.json
+$ aws ec2 import-image --description "centos-7-docker-machine.ova" --license-type BYOL --disk-containers file://aws_config/containers.json
 ```
 
 7. Monitor the import
 
 ```
-aws ec2 describe-import-image-tasks
+$ aws ec2 describe-import-image-tasks
 ```
